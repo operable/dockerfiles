@@ -1,0 +1,25 @@
+FROM operable/alpine-base:0.1
+
+ENV ERLANG_PACKAGE_VERSION 18.3.2-r0
+ENV ELIXIR_VERSION 1.3.1
+
+# Erlang
+RUN apk -U add \
+    erlang=$ERLANG_PACKAGE_VERSION \
+    erlang-asn1=$ERLANG_PACKAGE_VERSION \
+    erlang-crypto=$ERLANG_PACKAGE_VERSION \
+    erlang-dev=$ERLANG_PACKAGE_VERSION \
+    erlang-erl-interface=$ERLANG_PACKAGE_VERSION \
+    erlang-inets=$ERLANG_PACKAGE_VERSION \
+    erlang-parsetools=$ERLANG_PACKAGE_VERSION \
+    erlang-public-key=$ERLANG_PACKAGE_VERSION \
+    erlang-ssl=$ERLANG_PACKAGE_VERSION \
+    erlang-syntax-tools=$ERLANG_PACKAGE_VERSION
+
+# Elixir
+RUN wget https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VERSION/Precompiled.zip && \
+    unzip -d /usr/local Precompiled.zip && \
+    rm -f /usr/local/bin/*.bat && \
+    rm -f Precompiled.zip
+RUN mix local.hex --force
+RUN mix local.rebar --force
