@@ -1,4 +1,4 @@
-FROM operable/alpine-base:0.1
+FROM operable/alpine-base:0.2
 
 ENV GO_PACKAGE_VERSION 1.6.3-r0
 ENV GOPATH /gopath
