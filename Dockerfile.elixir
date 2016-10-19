@@ -11,11 +11,13 @@ RUN apk -U add \
     erlang-dev=$ERLANG_PACKAGE_VERSION \
     erlang-erl-interface=$ERLANG_PACKAGE_VERSION \
     erlang-inets=$ERLANG_PACKAGE_VERSION \
+    erlang-mnesia=$ERLANG_PACKAGE_VERSION \
     erlang-parsetools=$ERLANG_PACKAGE_VERSION \
     erlang-public-key=$ERLANG_PACKAGE_VERSION \
     erlang-ssl=$ERLANG_PACKAGE_VERSION \
+    erlang-syntax-tools=$ERLANG_PACKAGE_VERSION \
     erlang-tools=$ERLANG_PACKAGE_VERSION \
-    erlang-syntax-tools=$ERLANG_PACKAGE_VERSION
+    erlang-xmerl=$ERLANG_PACKAGE_VERSION
 
 # Elixir
 RUN wget https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VERSION/Precompiled.zip && \
