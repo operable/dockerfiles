@@ -6,9 +6,3 @@ RUN apk -U add \
     git \
     make \
     openssl
-
-RUN apk -U add \
-    expat-dev \
-    gcc \
-    g++ \
-    libstdc++
