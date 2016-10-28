@@ -8,3 +8,6 @@ elixir:
 
 go:
 	docker build -t operable/go:1.6.3-r1 . -f Dockerfile.go
+
+elixir-debian:
+	docker build -t operable/elixir-debian:1.3.1-r0 . -f Dockerfile.elixir-debian
