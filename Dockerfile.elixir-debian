@@ -1,0 +1,29 @@
+FROM debian:jessie
+
+ENV ERLANG_PACKAGE_VERSION 18.3
+ENV ELIXIR_VERSION 1.3.1
+
+# TODO: Could be in debian-base?
+RUN apt-get update && apt-get -y install wget unzip git make
+
+# Elixir wants UTF-8... yes, this is how that happens.
+RUN apt-get install -y locales && \
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen && \
+    dpkg-reconfigure --frontend=noninteractive locales && \
+    update-locale LANG=en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+
+# HATE
+RUN apt-get update && \
+    wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb && \
+    dpkg -i erlang-solutions_1.0_all.deb && \
+    rm erlang-solutions_1.0_all.deb && \
+    apt-get update && \
+    apt-get -y install esl-erlang=1:$ERLANG_PACKAGE_VERSION && \
+    wget https://github.com/elixir-lang/elixir/releases/download/v$ELIXIR_VERSION/Precompiled.zip && \
+    unzip -d /usr/local Precompiled.zip && \
+    rm -f /usr/local/bin/*.bat && \
+    rm -f Precompiled.zip && \
+    mix local.hex --force && \
+    mix local.rebar --force
